@@ -1,3 +1,4 @@
+script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"
 
 div ng-controller="PhotoListCtrl"
   .dashboard
@@ -9,17 +10,21 @@ div ng-controller="PhotoListCtrl"
           .frame
             img src="{{currentPhoto.image_standard_resolution}}" width='500px'
             br
-            .details
-              |{{currentPhoto.tags}}
-              br
-              a href="{{currentPhoto.instagram_url}}"
-                |{{currentPhoto.instagram_url}}
-              br
-              |{{currentPhoto.name}}
-              br
-              |{{currentPhoto.vicinity}}
-              br
-              |{{currentPhoto.city_name}}
+            /span ng-repeat="tag in tags"
+              /span ng-bind-html='tag' class="label label-default"
+                /|{{tag}}&nbsp;
+              /|&nbsp;
+            |{{currentPhoto.tags}}
+            br
+            a href="{{currentPhoto.instagram_url}}"
+              |{{currentPhoto.instagram_url}}
+            br
+            |{{currentPhoto.name}}
+            br
+            |{{currentPhoto.vicinity}}
+            br
+            |{{currentPhoto.city_name}}
+            #map-canvas
         td.valign
           .frame
             span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "

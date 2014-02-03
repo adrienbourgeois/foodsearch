@@ -13,6 +13,11 @@
   src: local('Amaranth Bold'), local('Amaranth-Bold'), url(http://themes.googleusercontent.com/static/fonts/amaranth/v4/hh4Od9pccylRpuf5LUPgErrIa-7acMAeDBVuclsi6Gc.woff) format('woff');
 }
 
+#map-canvas {
+  height: 300px;
+  width: 500px;
+}
+
 body {
   padding-top: 15px;
   background-color: rgb(30,30,30);
