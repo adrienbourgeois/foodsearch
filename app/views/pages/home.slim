@@ -1,7 +1,7 @@
 
 div ng-controller="PhotoListCtrl"
   .dashboard
-    input.form-control.large-formitem type='text' placeholder="vegan, gluttenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
+    input.form-control.large-formitem type='text' placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
     br
     table.min-width
       tr
@@ -15,11 +15,11 @@ div ng-controller="PhotoListCtrl"
               a href="{{currentPhoto.instagram_url}}"
                 |{{currentPhoto.instagram_url}}
               br
-              |{{currentPhoto.place.name}}
+              |{{currentPhoto.name}}
               br
-              |{{currentPhoto.place.vicinity}}
+              |{{currentPhoto.vicinity}}
               br
-              |{{currentPhoto.place.city_name}}
+              |{{currentPhoto.city_name}}
         td.valign
           .frame
             span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "

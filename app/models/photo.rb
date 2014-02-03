@@ -1,4 +1,3 @@
-
 class Photo < ActiveRecord::Base
   belongs_to :place
   validates :instagram_id,:image_low_resolution,:image_thumbnail,:tags, presence: true
@@ -7,5 +6,9 @@ class Photo < ActiveRecord::Base
   validates :checked, inclusion: { in: [true,false], message: "has to be true or false" }
 
   scope :checked, -> { where(checked: true) }
+
+  def self.around(latitude,longitude,rayon)
+    Place.near([latitude,longitude],rayon).select("photos.image_thumbnail, photos.image_standard_resolution, photos.tags, photos.instagram_url").joins(:photos).limit(4000)
+  end
 
 end
