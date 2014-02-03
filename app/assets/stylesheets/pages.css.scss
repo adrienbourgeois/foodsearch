@@ -1,0 +1,68 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import "bootstrap";
+@import "font-awesome";
+
+@font-face {
+  font-family: 'Amaranth';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Amaranth Bold'), local('Amaranth-Bold'), url(http://themes.googleusercontent.com/static/fonts/amaranth/v4/hh4Od9pccylRpuf5LUPgErrIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+}
+
+body {
+  padding-top: 15px;
+  background-color: rgb(30,30,30);
+}
+
+h1, h2, h3 {
+  font-family: 'Amaranth', sans-serif;
+}
+
+h1 {
+  font-size: 60px;
+  /*text-shadow: 0px 1px 0px #fff;*/
+  margin: 0;
+  padding: 0;
+  color: #D59626;
+}
+
+.large-formitem {
+  height: 50px;
+  font-size: 30px;
+}
+
+.valign {
+  vertical-align: top;
+}
+
+.dashboard {
+  min-width: 1138px;
+  border-radius: 15px;
+  background-color: rgb(230,230,230);
+  padding: 15px;
+}
+
+.min-width {
+  min-width: 1000px;
+  max-height: 500px;
+}
+
+.no-display {
+  display: none;
+}
+
+.frame {
+  max-height: 530px;
+  overflow: auto;
+}
+
+.footer {
+  padding: 40px;
+  color: rgb(120,120,120);
+  background-color: rgb(50,50,50);
+  width: 100%;
+}

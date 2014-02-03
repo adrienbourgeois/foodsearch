@@ -1,0 +1,34 @@
+
+div ng-controller="PhotoListCtrl"
+  .dashboard
+    input.form-control.large-formitem type='text' placeholder="vegan, gluttenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
+    br
+    table.min-width
+      tr
+        td.valign width='500px'
+          .frame
+            img src="{{currentPhoto.image_standard_resolution}}" width='500px'
+            br
+            .details
+              |{{currentPhoto.tags}}
+              br
+              a href="{{currentPhoto.instagram_url}}"
+                |{{currentPhoto.instagram_url}}
+              br
+              |{{currentPhoto.place.name}}
+              br
+              |{{currentPhoto.place.vicinity}}
+              br
+              |{{currentPhoto.place.city_name}}
+        td.valign
+          .frame
+            span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "
+              img src="{{photo.image_thumbnail}}" ng-click="setCurrentPhoto(photo)"
+            center
+              br
+              button.btn.btn-primary.btn-large ng-click="morePhotos()"
+                |More
+            .no-display
+              span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "
+                img src="{{photo.image_standard_resolution}}"
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="SearchFood">
+<head>
+  <title>Foodsearch</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <%= yield %>
+</div>
+<br>
+<div class="footer">
+  Adrien Bourgeois
+  <br>
+  This application uses the database of "Eatme". You can find more information about "Eatme" on my github: <a href="http://github.com/adrienbourgeois/eatme/">http://github.com/adrienbourgeois/eatme/</a>
+  <br>
+  The backend is made with rails (with the help of some awesome gems) and the front-end is entirely made with Angular.
+  <br>
+  My first goal was to put into pratice what I recently learned about Angular.
+</div>
+
+</body>
+</html>
