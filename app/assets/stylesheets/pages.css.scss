@@ -14,8 +14,18 @@
 }
 
 #map-canvas {
-  height: 300px;
-  width: 500px;
+  height: 100px;
+  /*width: 480px;*/
+  width: 100%;
+}
+
+.restaurant-name {
+  color: #BB2727;
+  font-size: 14px;
+}
+
+.address {
+  /*font-style: italic;*/
 }
 
 body {
@@ -46,9 +56,9 @@ h1 {
 
 .dashboard {
   min-width: 1138px;
-  border-radius: 15px;
+  border-radius: 12px;
   background-color: rgb(230,230,230);
-  padding: 15px;
+  padding: 12px;
 }
 
 .min-width {

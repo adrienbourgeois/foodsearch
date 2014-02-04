@@ -1,7 +1,8 @@
 app = angular.module("SearchFood",[])
 
-app.controller "PhotoListCtrl", ["$scope", "$http", "$q", ($scope, $http, $q) ->
+app.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", ($scope, $http, $q, $timeout) ->
 
+  map = null
   latitude_user = 0
   longitude_user = 0
   defer = $q.defer()
@@ -10,7 +11,7 @@ app.controller "PhotoListCtrl", ["$scope", "$http", "$q", ($scope, $http, $q) ->
     $http.get("/photos?latitude=#{latitude_user}&longitude=#{longitude_user}").success (data) ->
       $scope.photos = data
       $scope.setCurrentPhoto(data[0])
-      $scope.tags = JSON.parse $scope.currentPhoto.tags
+      $scope.tags = JSON.parse data[0].tags
 
   navigator.geolocation.getCurrentPosition (position) ->
     latitude_user = position.coords.latitude
@@ -19,6 +20,7 @@ app.controller "PhotoListCtrl", ["$scope", "$http", "$q", ($scope, $http, $q) ->
 
   $scope.setCurrentPhoto = (photo) ->
     $scope.currentPhoto = photo
+    $scope.tags = JSON.parse photo.tags
     myLatlng = new google.maps.LatLng(photo.latitude, photo.longitude)
     mapOptions =
       center: myLatlng
@@ -29,7 +31,7 @@ app.controller "PhotoListCtrl", ["$scope", "$http", "$q", ($scope, $http, $q) ->
       position: myLatlng
       map: map
     )
-    google.maps.event.addDomListener window, "load", initialize_map()
+    #google.maps.event.addDomListener window, "load", initialize_map()
 
   $scope.photosMax = 32
 
@@ -39,5 +41,13 @@ app.controller "PhotoListCtrl", ["$scope", "$http", "$q", ($scope, $http, $q) ->
   $scope.restartMaxPhotos = ->
     $scope.photosMax = 32
 
+  $scope.heightMap = { "height": '100px' }
+
+
+  $scope.setHeightMap = (value) ->
+    $scope.heightMap = { "height": value }
+    $timeout (->
+      $scope.setCurrentPhoto($scope.currentPhoto)
+    ), 50
 ]
 

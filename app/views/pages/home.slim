@@ -3,28 +3,34 @@ script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/jav
 div ng-controller="PhotoListCtrl"
   .dashboard
     input.form-control.large-formitem type='text' placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
-    br
+    span ng-click="setHeightMap('400px')"
+      |Zoom in
+    span ng-click="setHeightMap('100px')"
+      |Zoom out
+    #map-canvas ng-style="heightMap"
     table.min-width
       tr
         td.valign width='500px'
           .frame
             img src="{{currentPhoto.image_standard_resolution}}" width='500px'
             br
-            /span ng-repeat="tag in tags"
-              /span ng-bind-html='tag' class="label label-default"
-                /|{{tag}}&nbsp;
-              /|&nbsp;
-            |{{currentPhoto.tags}}
+            pre
+              span ng-repeat="tag in tags"
+                /span ng-bind-html='tag' class="label label-default"
+                |#
+                |{{tag}}&nbsp;
+                /|&nbsp;
+            /|{{currentPhoto.tags}}
+            span.restaurant-name
+              span.glyphicon.glyphicon-map-marker
+              |{{currentPhoto.name}}
+            br
+            span.address
+              |{{currentPhoto.vicinity}}
             br
             a href="{{currentPhoto.instagram_url}}"
               |{{currentPhoto.instagram_url}}
-            br
-            |{{currentPhoto.name}}
-            br
-            |{{currentPhoto.vicinity}}
-            br
-            |{{currentPhoto.city_name}}
-            #map-canvas
+            /#map-canvas
         td.valign
           .frame
             span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "
