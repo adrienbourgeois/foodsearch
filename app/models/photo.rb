@@ -8,7 +8,7 @@ class Photo < ActiveRecord::Base
   scope :checked, -> { where(checked: true) }
 
   def self.around(latitude,longitude,rayon)
-    Place.near([latitude,longitude],rayon).select("photos.image_thumbnail, photos.image_standard_resolution, photos.tags, photos.instagram_url").joins(:photos).limit(4000)
+    Place.near([latitude,longitude],rayon).select("photos.image_thumbnail, photos.image_standard_resolution, photos.tags, photos.instagram_url").joins(:photos).limit(400)
   end
 
 end

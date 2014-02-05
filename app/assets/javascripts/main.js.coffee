@@ -1,53 +1,23 @@
-app = angular.module("SearchFood",[])
+app = angular.module("SearchFood",['ngRoute','controllers'])
 
-app.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", ($scope, $http, $q, $timeout) ->
+app.config ($routeProvider) ->
+  $routeProvider
+    .when '/',
+      templateUrl: "dashboard.html"
+      controller: "PhotoListCtrl"
+      resolve:
+        app: ($q, $http) ->
+          defer = $q.defer()
+          console.log "helloooo"
+          photos = null
 
-  map = null
-  latitude_user = 0
-  longitude_user = 0
-  defer = $q.defer()
-
-  defer.promise.then ->
-    $http.get("/photos?latitude=#{latitude_user}&longitude=#{longitude_user}").success (data) ->
-      $scope.photos = data
-      $scope.setCurrentPhoto(data[0])
-      $scope.tags = JSON.parse data[0].tags
-
-  navigator.geolocation.getCurrentPosition (position) ->
-    latitude_user = position.coords.latitude
-    longitude_user = position.coords.longitude
-    defer.resolve()
-
-  $scope.setCurrentPhoto = (photo) ->
-    $scope.currentPhoto = photo
-    $scope.tags = JSON.parse photo.tags
-    myLatlng = new google.maps.LatLng(photo.latitude, photo.longitude)
-    mapOptions =
-      center: myLatlng
-      zoom: 16
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
-    marker = new google.maps.Marker(
-      position: myLatlng
-      map: map
-    )
-    #google.maps.event.addDomListener window, "load", initialize_map()
-
-  $scope.photosMax = 32
-
-  $scope.morePhotos = ->
-    $scope.photosMax += 32
-
-  $scope.restartMaxPhotos = ->
-    $scope.photosMax = 32
-
-  $scope.heightMap = { "height": '100px' }
-
-
-  $scope.setHeightMap = (value) ->
-    $scope.heightMap = { "height": value }
-    $timeout (->
-      $scope.setCurrentPhoto($scope.currentPhoto)
-    ), 50
-]
+          navigator.geolocation.getCurrentPosition (position) ->
+            location =
+              latitude:  position.coords.latitude
+              longitude: position.coords.longitude
+            $http.get("/photos?latitude=#{location.latitude}&longitude=#{location.longitude}").success (data) ->
+              photos = data
+              defer.resolve()
+          defer.promise.then ->
+            return photos
 

@@ -1,0 +1,43 @@
+.dashboard
+  /h1
+    /|Miam
+  input.form-control.large-formitem type='text' placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
+  span ng-click="setHeightMap('400px')"
+    |Zoom in
+  span ng-click="setHeightMap('100px')"
+    |Zoom out
+  #map-canvas ng-style="heightMap"
+  table.min-width
+    tr
+      td.valign width='500px'
+        .frame
+          img src="{{currentPhoto.image_standard_resolution}}" width='500px'
+          br
+          pre
+            span ng-repeat="tag in tags"
+              /span ng-bind-html='tag' class="label label-default"
+              |#
+              |{{tag}}&nbsp;
+              /|&nbsp;
+          /|{{currentPhoto.tags}}
+          span.restaurant-name
+            span.glyphicon.glyphicon-map-marker
+            |{{currentPhoto.name}}
+          br
+          span.address
+            |{{currentPhoto.vicinity}}
+          br
+          a href="{{currentPhoto.instagram_url}}"
+            |{{currentPhoto.instagram_url}}
+          /#map-canvas
+      td.valign
+        .frame
+          span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "
+            img src="{{photo.image_thumbnail}}" ng-click="setCurrentPhoto(photo)"
+          center
+            br
+            button.btn.btn-primary.btn-large ng-click="morePhotos()"
+              |More
+          .no-display
+            span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "
+              img src="{{photo.image_standard_resolution}}"
