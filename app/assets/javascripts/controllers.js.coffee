@@ -1,4 +1,4 @@
-controllers = angular.module('controllers', []);
+controllers = angular.module('controllers', ['directives']);
 
 controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$location", "app", ($scope, $http, $q, $timeout, $location, app) ->
   console.log "location: #{$location.path()}"
@@ -32,6 +32,22 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
     $scope.photosMax = 32
 
   $scope.heightMap = { "height": '100px' }
+
+  $scope.keywords = []
+
+  $scope.myFilter = (o) ->
+    for keyword in $scope.keywords
+      if o.tags.search(keyword) is -1
+        return false
+    if $scope.foodType != undefined and o.tags.search($scope.foodType.tags) is -1
+      return false
+    return true
+
+
+  $scope.helloworld = (value) ->
+    $scope.keywords.push value
+    console.log $scope.keywords
+    $scope.foodType.tags = ""
 
 
   $scope.setHeightMap = (value) ->
