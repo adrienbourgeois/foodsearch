@@ -16,9 +16,7 @@ directives.directive 'keyword', ->
     link: (scope, element, attrs) ->
       element.on "click", (event)  ->
         event.preventDefault()
-        id = scope.keywords.indexOf(element.text())
+        id = scope.keywords.indexOf element.text().slice(0,-1)
         scope.keywords.splice id,1
         scope.$apply()
-
-
   }
