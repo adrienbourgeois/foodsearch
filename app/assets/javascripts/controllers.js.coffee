@@ -1,4 +1,4 @@
-controllers = angular.module('controllers', ['directives']);
+controllers = angular.module('controllers', []);
 
 controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$location", "app", ($scope, $http, $q, $timeout, $location, app) ->
   console.log "location: #{$location.path()}"

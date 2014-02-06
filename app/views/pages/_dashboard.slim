@@ -1,8 +1,7 @@
 .dashboard
-  span ng-repeat="keyword in keywords"
-    keyword
+  .keywords-block
+    keyword ng-repeat="keyword in keywords"
       |{{keyword}}
-    |&nbsp;
   .input-group
     input.form-control.large-formitem type='text' ng-enter="helloworld(foodType.tags)" placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
     .input-group-btn
@@ -19,11 +18,8 @@
           br
           pre
             span ng-repeat="tag in tags"
-              /span ng-bind-html='tag' class="label label-default"
               |#
               |{{tag}}&nbsp;
-              /|&nbsp;
-          /|{{currentPhoto.tags}}
           span.restaurant-name
             span.glyphicon.glyphicon-map-marker
             |{{currentPhoto.name}}
@@ -33,7 +29,6 @@
           br
           a href="{{currentPhoto.instagram_url}}"
             |{{currentPhoto.instagram_url}}
-          /#map-canvas
       td.valign
         .frame
           span ng-repeat="photo in photos | filter:myFilter | limitTo:photosMax "

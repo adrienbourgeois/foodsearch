@@ -1,4 +1,4 @@
-app = angular.module("SearchFood",['ngRoute','controllers'])
+app = angular.module("SearchFood",['ngRoute','controllers','directives'])
 
 app.config ($routeProvider) ->
   $routeProvider
