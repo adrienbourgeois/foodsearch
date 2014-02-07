@@ -24,16 +24,20 @@ directives.directive 'keyword', ->
 directives.directive 'showmap', ->
   return {
     restrict: "E"
-    controller: ($scope) ->
-      $scope.adrien = "bourgeois"
-    scope: {
+    scope:
       createMap: "&"
       photo: "="
-    }
-    template: '<div><a href="#">View on the map</a></div><div class="mapcanvas" id="mapdiv{{photo.instagram_url}}"></div>'
-    link: (scope, element) ->
-      element.on "click", (event) ->
-        event.preventDefault()
-        console.log scope.adrien
-        scope.createMap({latitude:scope.photo.latitude,longitude:scope.photo.longitude,mapDiv:"mapdiv#{scope.photo.instagram_url}"})
+    template: '<div><a href="" ng-click="showMap()" ' +
+              'ng-show="showMapLinkVisibility">View on the map</a>' +
+              '<a href="" ng-click="showMap()" ng-show="!showMapLinkVisibility">' +
+              'Hide map</a></div>' +
+              '<div class="mapcanvas" id="mapdiv{{photo.instagram_url}}" ng-show="!showMapLinkVisibility"></div>'
+    controller: ($scope,$timeout) ->
+      $scope.showMapLinkVisibility = true
+      $scope.showMap = ->
+        console.log !$scope.showMapLinkVisibility
+        $scope.showMapLinkVisibility = !$scope.showMapLinkVisibility
+        $timeout (->
+          $scope.createMap({latitude:$scope.photo.latitude,longitude:$scope.photo.longitude,mapDiv:"mapdiv#{$scope.photo.instagram_url}"})
+        ), 10
   }
