@@ -41,3 +41,28 @@ directives.directive 'showmap', ->
           $scope.createMap({latitude:$scope.photo.latitude,longitude:$scope.photo.longitude,mapDiv:"mapdiv#{$scope.photo.instagram_url}"})
         ), 10
   }
+
+directives.directive 'buttonpannel', ->
+  return {
+    restrict: "E"
+    scope:
+      glyphclass1: "@"
+      actionfunction1: "&"
+      glyphclass2: "@"
+      actionfunction2: "&"
+    controller: ($scope) ->
+      $scope.visibility1 = true
+      $scope.go1 = ->
+        $scope.visibility1 = !$scope.visibility1
+        $scope.actionfunction1()
+      $scope.go2 = ->
+        $scope.visibility1 = !$scope.visibility1
+        $scope.actionfunction2()
+    template: '<button class="btn btn-default btn-lg" type="submit" ' +
+              'ng-click="go1()" ng-show="visibility1">' +
+              '<span class="glyphicon {{glyphclass1}}"></span></button>' +
+              '<button class="btn btn-default btn-lg" type="submit" ' +
+              'ng-click="go2()" ng-hide="visibility1">' +
+              '<span class="glyphicon {{glyphclass2}}"></span></button>'
+
+  }

@@ -39,7 +39,7 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
   $scope.heightMap = { "height": '100px' }
   $scope.listDisplay = { "display": "none" }
   $scope.gridDisplay = { "display": "block" }
-  $scope.changeViewOrganization = (type) ->
+  $scope.changeViewOrganization = ({type:type}) ->
     if type is "grid"
       $scope.listDisplay = { "display": "none" }
       $scope.gridDisplay = { "display": "block" }
@@ -67,7 +67,7 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
     console.log value
 
 
-  $scope.setHeightMap = (value) ->
+  $scope.setHeightMap = ({value:value}) ->
     $scope.heightMap = { "height": value }
     $timeout (->
       $scope.setCurrentPhoto($scope.currentPhoto)

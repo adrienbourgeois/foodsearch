@@ -1,15 +1,14 @@
 .control-panel
-  button.btn.btn-default.btn-lg type="submit" ng-click="setHeightMap('400px')"
-    span.glyphicon.glyphicon-zoom-in
+  buttonpannel [glyphclass1="glyphicon-zoom-in"
+                actionfunction1="setHeightMap({value:'400px'})"
+                glyphclass2="glyphicon-zoom-out"
+                actionfunction2="setHeightMap({value:'100px'})"]
   br
-  button.btn.btn-default.btn-lg type="submit" ng-click="setHeightMap('100px')"
-    span.glyphicon.glyphicon-zoom-out
-  br
-  button.btn.btn-default.btn-lg type="submit" ng-click="changeViewOrganization('grid')"
-    span.glyphicon.glyphicon-th
-  br
-  button.btn.btn-default.btn-lg type="submit" ng-click="changeViewOrganization('list')"
-    span.glyphicon.glyphicon-th-list
+  buttonpannel [
+    glyphclass1="glyphicon-th-list"
+    actionfunction1="changeViewOrganization({type:'list'})"
+    glyphclass2="glyphicon-th"
+    actionfunction2="changeViewOrganization({type:'grid'})"]
 
 .dashboard
   .keywords-block
