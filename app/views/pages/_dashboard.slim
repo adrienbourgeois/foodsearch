@@ -1,42 +1,69 @@
+.control-panel
+  button.btn.btn-default.btn-lg type="submit" ng-click="setHeightMap('400px')"
+    span.glyphicon.glyphicon-zoom-in
+  br
+  button.btn.btn-default.btn-lg type="submit" ng-click="setHeightMap('100px')"
+    span.glyphicon.glyphicon-zoom-out
+  br
+  button.btn.btn-default.btn-lg type="submit" ng-click="changeViewOrganization('grid')"
+    span.glyphicon.glyphicon-th
+  br
+  button.btn.btn-default.btn-lg type="submit" ng-click="changeViewOrganization('list')"
+    span.glyphicon.glyphicon-th-list
+
 .dashboard
   .keywords-block
     keyword ng-repeat="keyword in keywords"
       |{{keyword}}
-  .input-group
-    input.form-control.large-formitem type='text' ng-enter="helloworld(foodType.tags)" placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
-    .input-group-btn
-      button.btn.btn-default.btn-lg.large-formitem type="submit" ng-click="setHeightMap('400px')"
-        span.glyphicon.glyphicon-zoom-in
-      button.btn.btn-default.btn-lg.large-formitem type="submit" ng-click="setHeightMap('100px')"
-        span.glyphicon.glyphicon-zoom-out
-  #map-canvas ng-style="heightMap"
-  table.min-width
-    tr
-      td.valign width='500px'
-        .frame
-          img src="{{currentPhoto.image_standard_resolution}}" width='500px'
-          br
-          pre
-            span ng-repeat="tag in tags"
-              |#
-              |{{tag}}&nbsp;
-          span.restaurant-name
-            span.glyphicon.glyphicon-map-marker
-            |{{currentPhoto.name}}
-          br
-          span.address
-            |{{currentPhoto.vicinity}}
-          br
-          a href="{{currentPhoto.instagram_url}}"
-            |{{currentPhoto.instagram_url}}
-      td.valign
-        .frame
-          span ng-repeat="photo in photos | filter:myFilter | limitTo:photosMax "
-            img src="{{photo.image_thumbnail}}" ng-click="setCurrentPhoto(photo)"
-          center
+  input.form-control.large-formitem type='text' ng-enter="helloworld(foodType.tags)" placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
+  .grid ng-style="gridDisplay"
+    #map-canvas ng-style="heightMap"
+    table.min-width
+      tr
+        td.valign width='500px'
+          .frame
+            img src="{{currentPhoto.image_standard_resolution}}" width='500px' height='500px'
             br
-            button.btn.btn-primary.btn-large ng-click="morePhotos()"
-              |More
-          .no-display
-            span ng-repeat="photo in photos | filter:foodType | limitTo:photosMax "
-              img src="{{photo.image_standard_resolution}}"
+            pre
+              span ng-repeat="tag in tags"
+                |#
+                |{{tag}}&nbsp;
+            span.restaurant-name
+              span.glyphicon.glyphicon-map-marker
+              |{{currentPhoto.name}}
+            br
+            span.address
+              |{{currentPhoto.vicinity}}
+            br
+            a href="{{currentPhoto.instagram_url}}"
+              |{{currentPhoto.instagram_url}}
+        td.valign
+          .frame
+            span ng-repeat="photo in photos | filter:myFilter | limitTo:photosMax "
+              .preinfos
+                img src="{{photo.image_thumbnail}}" ng-click="setCurrentPhoto(photo)"
+            center
+              br
+              button.btn.btn-primary.btn-large ng-click="morePhotos()"
+                |More
+  .list ng-style="listDisplay"
+    .frame
+      span ng-repeat="photo in photos | filter:myFilter | limitTo:photosMax "
+        table
+          tr
+            td.valign
+              img src="{{photo.image_standard_resolution}}" width="500px" height="500px"
+            td.valign
+              span.restaurant-name
+                span.glyphicon.glyphicon-map-marker
+                |{{photo.name}}
+              br
+              span.address
+                |{{photo.vicinity}}
+              br
+              a href="{{photo.instagram_url}}"
+                |{{photo.instagram_url}}
+              br
+              showmap create-map="createMap({latitude:latitude,longitude:longitude,mapDiv:mapDiv})" photo="photo"
+        br
+        br

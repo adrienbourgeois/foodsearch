@@ -5,25 +5,30 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
   map = null
   photos = app
 
-  $scope.setCurrentPhoto = (photo) ->
-    $scope.currentPhoto = photo
-    $scope.tags = JSON.parse photo.tags
-    myLatlng = new google.maps.LatLng(photo.latitude, photo.longitude)
+  $scope.createMap = ({latitude:latitude,longitude:longitude,mapDiv:mapDiv}) ->
+    console.log "gooo"
+    myLatlng = new google.maps.LatLng(latitude, longitude)
     mapOptions =
       center: myLatlng
       zoom: 16
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
+    map = new google.maps.Map(document.getElementById(mapDiv), mapOptions)
     marker = new google.maps.Marker(
       position: myLatlng
       map: map
     )
+
+  $scope.setCurrentPhoto = (photo) ->
+    $scope.currentPhoto = photo
+    $scope.tags = JSON.parse photo.tags
+    $scope.createMap {latitude:photo.latitude,longitude:photo.longitude,mapDiv:"map-canvas"}
 
   $scope.photos = photos
   $scope.setCurrentPhoto(photos[0])
   $scope.tags = JSON.parse photos[0].tags
   $scope.photosMax = 32
   $scope.bourgeois = 'Adrien'
+
 
   $scope.morePhotos = ->
     $scope.photosMax += 32
@@ -32,6 +37,15 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
     $scope.photosMax = 32
 
   $scope.heightMap = { "height": '100px' }
+  $scope.listDisplay = { "display": "none" }
+  $scope.gridDisplay = { "display": "block" }
+  $scope.changeViewOrganization = (type) ->
+    if type is "grid"
+      $scope.listDisplay = { "display": "none" }
+      $scope.gridDisplay = { "display": "block" }
+    else
+      $scope.listDisplay = { "display": "block" }
+      $scope.gridDisplay = { "display": "none" }
 
   $scope.keywords = []
 
@@ -48,6 +62,9 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
     $scope.keywords.push value
     console.log $scope.keywords
     $scope.foodType.tags = ""
+
+  $scope.test = ({value:value}) ->
+    console.log value
 
 
   $scope.setHeightMap = (value) ->
