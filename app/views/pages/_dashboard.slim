@@ -9,12 +9,21 @@
     actionfunction1="changeViewOrganization({type:'list'})"
     glyphclass2="glyphicon-th"
     actionfunction2="changeViewOrganization({type:'grid'})"]
+  br
+  button.btn.btn-default.btn-lg type="submit" ng-click="increaseDistance()"
+    span.glyphicon.glyphicon-plus
+  br
+  /button.btn type="submit"
+  .distance-display
+    |{{distanceArray[distanceArrayIndex]}}mi
+  button.btn.btn-default.btn-lg type="submit" ng-click="decreaseDistance()"
+    span.glyphicon.glyphicon-minus
 
 .dashboard
   .keywords-block
     keyword ng-repeat="keyword in keywords"
       |{{keyword}}
-  input.form-control.large-formitem type='text' ng-enter="helloworld(foodType.tags)" placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
+  input.form-control.large-formitem type='text' ng-enter="pushKeyWord(foodType.tags)" placeholder="vegan, glutenfree, dessert, ribs, bbq, seafood, chinese, thai, french, italian, etc." ng-model="foodType.tags" ng-keypress="restartMaxPhotos()"
   .grid ng-style="gridDisplay"
     #map-canvas ng-style="heightMap"
     table.min-width
@@ -34,13 +43,15 @@
             span.address
               |{{currentPhoto.vicinity}}
             br
+              |{{currentPhoto.distance}} miles
             a href="{{currentPhoto.instagram_url}}"
               |{{currentPhoto.instagram_url}}
         td.valign
           .frame
             span ng-repeat="photo in photos | filter:myFilter | limitTo:photosMax "
               .preinfos
-                img src="{{photo.image_thumbnail}}" ng-click="setCurrentPhoto(photo)"
+                a [href]
+                  img src="{{photo.image_thumbnail}}" ng-click="setCurrentPhoto(photo)"
             center
               br
               button.btn.btn-primary.btn-large ng-click="morePhotos()"
@@ -59,6 +70,8 @@
               br
               span.address
                 |{{photo.vicinity}}
+              br
+              |{{photo.distance}} miles
               br
               a href="{{photo.instagram_url}}"
                 |{{photo.instagram_url}}

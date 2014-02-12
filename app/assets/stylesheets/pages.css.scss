@@ -22,6 +22,14 @@
   /*margin-bottom: 7px;*/
 }
 
+.distance-display {
+  transform:rotate(90deg);
+  -ms-transform:rotate(90deg); /* IE 9 */
+  -webkit-transform:rotate(90deg); /* Safari and Chrome */
+  font-size: 20px;
+  margin: 20px 0px;
+}
+
 .control-panel {
   position: fixed;
   top: 195px;
