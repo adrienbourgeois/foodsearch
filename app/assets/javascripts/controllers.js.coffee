@@ -47,7 +47,7 @@ controllers.controller "PhotoListCtrl", ["$scope", "$http", "$q", "$timeout", "$
       $scope.gridDisplay = { "display": "none" }
 
   $scope.keywords = []
-  $scope.distanceArrayIndex = 5
+  $scope.distanceArrayIndex = 13
 
   $scope.myFilter = (o) ->
     for keyword in $scope.keywords

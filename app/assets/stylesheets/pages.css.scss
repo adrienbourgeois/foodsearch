@@ -32,9 +32,9 @@
 
 .control-panel {
   position: fixed;
-  top: 195px;
-  right: 30px;
-  background-color: rgba(250,250,250,0.6);
+  top: 150px;
+  right: 15px;
+  background-color: rgba(200,200,200,0.6);
   padding: 10px;
   z-index: 20;
 }
@@ -45,11 +45,6 @@
   display: inline;
 }
 
-.info2 {
-  position: absolute;
-  /*position: relative;*/
-  display: inline;
-}
 
 .infos {
   /*display: inline;*/
@@ -101,12 +96,6 @@
   }
 
 }
-
-/*#map-canvas {*/
-  /*height: 100px;*/
-  /*width: 100%;*/
-  /*margin-bottom: 5px;*/
-/*}*/
 
 .restaurant-name {
   color: #BB2727;
