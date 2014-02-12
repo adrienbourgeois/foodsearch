@@ -43,7 +43,11 @@
             span.address
               |{{currentPhoto.vicinity}}
             br
-              |{{currentPhoto.distance}} miles
+            span.glyphicon.glyphicon-road
+            |&nbsp;{{currentPhoto.distance}} miles
+            br
+            span.glyphicon.glyphicon-globe
+            |&nbsp;
             a href="{{currentPhoto.instagram_url}}"
               |{{currentPhoto.instagram_url}}
         td.valign
@@ -71,8 +75,11 @@
               span.address
                 |{{photo.vicinity}}
               br
-              |{{photo.distance}} miles
+              span.glyphicon.glyphicon-road
+              |&nbsp;{{photo.distance}} miles
               br
+              span.glyphicon.glyphicon-globe
+              |&nbsp;
               a href="{{photo.instagram_url}}"
                 |{{photo.instagram_url}}
               br
